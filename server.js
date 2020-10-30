@@ -26,4 +26,7 @@ else
 {
 	console.log('connected')
 }
-app.listen(8080)
+app.get("/",(req,res)=>{
+	console.log("server running ")
+})
+app.listen(process.env.port || 8080)
