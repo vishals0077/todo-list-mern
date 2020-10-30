@@ -10,6 +10,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 let apiRoutes = require('./routes');
 app.use('/api',apiRoutes);
+if(process.env.NODE_ENV === 'production') {
+	app.use(express.static('frontend/internship-task/build'));
+	app.get('*',(req,res)=> {
+		res.sendFile(path.join(__dirname, 'frontend','internship-task','build','index.html'));
+	});
+}
 mongoose.connect('mongodb+srv://vishalmongo:vsharmaa0077@cluster0.q0bvj.mongodb.net/todoList',{useFindAndModify: false,useNewUrlParser:true,useUnifiedTopology:true,useCreateIndex: true,});
 var db = mongoose.connection;
 if(!db)
