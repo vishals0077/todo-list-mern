@@ -23,4 +23,4 @@ else
 app.get("/",(req,res)=>{
 	console.log("server running ")
 })
-app.listen(process.env.port || 8080)
+app.listen(process.env.PORT || 8080)
