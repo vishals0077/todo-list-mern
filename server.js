@@ -22,5 +22,8 @@ else
 }
 app.get("/",(req,res)=>{
 	console.log("server running ")
+	res.json({
+		message:"hello there"
+	})
 })
 app.listen(process.env.PORT || 8080)
