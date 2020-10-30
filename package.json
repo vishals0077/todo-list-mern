@@ -18,16 +18,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start":"nodemon server.js",
-    "heroku-postbuild": "cd frontend && cd internship-task && npm install && npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vishals0077/internship-task.git"
+    "heroku-postbuild": "cd frontend && cd internship-task && npm install && npm run build",
+    "nodemon": "^2.0.6"
   },
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/vishals0077/internship-task/issues"
-  },
-  "homepage": "https://github.com/vishals0077/internship-task#readme"
+  "license": "ISC"
 }
