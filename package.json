@@ -17,10 +17,13 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"nodemon server.js",
-    "heroku-postbuild": "cd frontend && cd internship-task && npm install && npm run build",
-    "nodemon": "^2.0.6"
+    "start":"nodemon server.js"
+    
   },
   "author": "",
   "license": "ISC"
 }
+
+
+// "heroku-postbuild": "cd frontend && cd internship-task && npm install && npm run build",
+    // "nodemon": "^2.0.6"
