@@ -25,5 +25,3 @@
 }
 
 
-// "heroku-postbuild": "cd frontend && cd internship-task && npm install && npm run build",
-    // "nodemon": "^2.0.6"
