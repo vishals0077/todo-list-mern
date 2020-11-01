@@ -3,15 +3,18 @@ import './App.css';
 import * as THREE from 'three';
 import BIRDS from 'vanta/dist/vanta.birds.min';
 import { BrowserRouter,Route,Switch } from 'react-router-dom';
+
 import NavigationBar from '../components/NavigationBar/NavigationBar';
 import SignUp from '../components/SignUp/SignUp';
 import SignIn from '../components/SignIn/SignIn';
 import Dashboard from '../components/Dashboard/Dashboard';
+
+
 class App extends React.Component{
   constructor() {
     super()
-    this.State={
-      route:'home'
+    this.state={
+      loading: true
     }
     this.vantaRef = React.createRef()
   }
@@ -42,6 +45,7 @@ class App extends React.Component{
     <Route path="/signup" component={SignUp} />
     <Route path="/dashboard" component={Dashboard} />
     </Switch>
+     
     <div ref={this.vantaRef}   style={{
                 width: '100%',
                 position: 'fixed',

@@ -1,16 +1,23 @@
 import React from 'react';
 import './Dashboard.css';
 import {NavLink} from 'react-router-dom';
-
+import { css } from "@emotion/core";
+import DotLoader from "react-spinners/SyncLoader";
+const override = css`
+  display: block;
+  margin: 20px;
+`;
 class Dashboard extends React.Component{
 	constructor(){
 		super();
 		this.state={
-			todos:[]
+			todos:[],
+			loading: false
 		}
 	}
 	
 	gettask(){
+			this.setState({loading: true});
 			fetch("https://radiant-plains-32400.herokuapp.com/api/gettask",{
 			method: 'post',
 			headers: ({'Content-Type': 'application/json'}),
@@ -32,12 +39,13 @@ class Dashboard extends React.Component{
 			else
 			{
 				console.log(tasks)
-			}					
+			}
+			this.setState({loading: false});					
 		})
 	}
 		addingTask=()=>
 	{
-	
+		this.setState({loading: true});
 		fetch("https://radiant-plains-32400.herokuapp.com/api/addtask",{
 			method: 'post',
 			headers: ({'Content-Type':'application/json'}),
@@ -61,12 +69,12 @@ class Dashboard extends React.Component{
 			{
 				console.log(tasks)
 			}
-
+			this.setState({loading: false});
 		})
 	}
 		deleteTask = (event)=>{
 		
-		
+			this.setState({loading: true});
 			fetch("https://radiant-plains-32400.herokuapp.com/api/deletetask",{
 			method:'put',
 			headers: ({'Content-Type':'application/json'}),
@@ -91,6 +99,7 @@ class Dashboard extends React.Component{
 			{
 				console.log(tasks)
 			}
+			this.setState({loading: false});
 		})
 		
 		
@@ -118,6 +127,14 @@ class Dashboard extends React.Component{
                </div>
             </nav>
             <div id="taskwindow" >
+             <div className="sweet-loading">
+                  <DotLoader
+                    css={override}
+                    size={30}
+                    color={"white"}
+                    loading={this.state.loading}
+                  />
+                </div>
             <div className="input-group">
 	<input id="taskfield" type="text" className="form-control" placeholder="enter task here">
 	</input>

@@ -1,24 +1,40 @@
 import React from 'react';
 import './SignUp.css';
 import {NavLink} from 'react-router-dom';
+import { css } from "@emotion/core";
+import DotLoader from "react-spinners/SyncLoader";
+const override = css`
+  display: block;
+  margin: 20px;
+`;
 class SignUp extends React.Component{
-    
+         constructor(){
+           super();
+           this.state={
+              
+               loading: false
+           }
+       }
      validateCredentials=()=>{
         if(!(document.getElementById('emailsignup').value.includes('.')) || !(document.getElementById('emailsignup').value.includes('@')))
         {
           alert('enter valid email');
           document.getElementById('emailsignup').value="";
+          this.setState({loading:false})
         }   
         else if(document.getElementById('namesignup').value==='')
         {
           alert("enter a name");
+          this.setState({loading:false})
         }
         else if(document.getElementById('passwordsignup').value==='')
         {
           alert("enter a password");
+          this.setState({loading:false})
         }
     }
      clickSignup=()=>{
+          this.setState({loading: true});
          this.validateCredentials();
          fetch("https://radiant-plains-32400.herokuapp.com/api/register",{
              method: 'post',
@@ -43,6 +59,7 @@ class SignUp extends React.Component{
              {
                  console.log(data);
              }
+             this.setState({loading:false})
          })
          
     }
@@ -71,7 +88,16 @@ class SignUp extends React.Component{
                    <p className="btn btn-primary btn-block" onClick={this.clickSignup}>Sign Up</p>    
                  </div>
                 <NavLink id="navigatetosignin" style={{display: 'none'}} to="/"></NavLink>
+                 <div className="sweet-loading">
+                  <DotLoader
+                    css={override}
+                    size={30}
+                    color={"white"}
+                    loading={this.state.loading}
+                  />
+                </div>
             </form>
+            
 			</div>
 			)
 	}

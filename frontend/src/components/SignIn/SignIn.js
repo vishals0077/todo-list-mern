@@ -1,16 +1,23 @@
 import React from 'react';
 import './SignIn.css';
 import { NavLink } from 'react-router-dom';
+import { css } from "@emotion/core";
+import DotLoader from "react-spinners/SyncLoader";
 
+const override = css`
+  display: block;
+  margin: 20px;
+`;
 class SignIn extends React.Component{
        constructor(){
            super();
            this.state={
-               user_Id:''
+               user_Id:'',
+               loading: false
            }
        }
       clickSignin=()=>{
-           
+           this.setState({loading: true});
           fetch("https://radiant-plains-32400.herokuapp.com/api/signin",{
             method: 'post',
             headers: ({'Content-Type':'application/json'}),
@@ -26,6 +33,7 @@ class SignIn extends React.Component{
                 this.setState({user_Id:data.data[0]._id})
                 var link= document.getElementById("navigate");
                 link.click();
+               
             }
             else if(data.status===300)
             {
@@ -39,6 +47,7 @@ class SignIn extends React.Component{
             {
                 console.log(data)
             }
+             this.setState({loading:false})
         })
         
         
@@ -47,6 +56,7 @@ class SignIn extends React.Component{
 	render()
 	{
 		return(
+
 			<div id="signinform">
 			 <form>
                 <h1>Sign In</h1>
@@ -65,6 +75,15 @@ class SignIn extends React.Component{
                  </div>
                 <NavLink id="navigate" style={{display: 'none'}} to={{pathname:'/dashboard', aboutProps:{userid:this.state.user_Id}}}></NavLink>
                
+                <div className="sweet-loading">
+                  <DotLoader
+                    css={override}
+                    size={30}
+                    color={"white"}
+                    loading={this.state.loading}
+                  />
+                </div>
+    
             </form>
 			</div>
 			)
